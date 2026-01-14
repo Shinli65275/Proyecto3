@@ -1,0 +1,36 @@
+{% extends 'biblioteca/base.html' %}
+
+{% block contenido %}
+<h2>Lista de Libros</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Fecha</th>
+            <th>Disponible</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for libro in libros %}
+        <tr>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>{{ libro.fecha | date:"d/m/y"}}</td>
+            <td>{{ libro.disponible }}</td>
+            <td>
+                <a class="btn btn-warning btn-sm" href="{% url 'editar_libro' libro.id %}">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                <a class="btn btn-danger btn-sm" href="{% url 'eliminar_libro' libro.id %}">
+                    <i class="bi bi-trash"></i>
+                </a>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
